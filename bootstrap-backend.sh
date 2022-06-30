@@ -1,4 +1,8 @@
 #!/bin/bash
+az deployment group create \
+  --resource-group ExampleGroup \
+  --template-file main.bicep \
+  --parameters storageAccountType=Standard_GRS
 
 # names must match the names in providers.tf
 RG_NAME="cd-teroidc-shared"
