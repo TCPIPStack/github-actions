@@ -14,9 +14,10 @@ jobs:
   deploy-with-terraform:
     runs-on: ubuntu-latest
     environment: dev
-    run:
+    defaults:
+      run:
         working-directory: infra
-        
+
     steps:
       - name: "Az CLI login"
         uses: azure/login@v1
