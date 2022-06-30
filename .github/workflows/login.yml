@@ -19,6 +19,8 @@ jobs:
         working-directory: ./infra
 
     steps:
+      - name: checkout repo
+        uses: actions/checkout@v2.3.4
       - name: "Az CLI login"
         uses: azure/login@v1
         with:
