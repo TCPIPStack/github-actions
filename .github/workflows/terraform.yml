@@ -1,4 +1,4 @@
-name: Infra deploy
+name: Deploy
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
     environment: tfplan
     defaults:
       run:
-        working-directory: ${{ env.tf_actions_working_dir }}
+        working-directory: infra
 
     steps:
       - uses: actions/checkout@v2
@@ -59,26 +59,14 @@ jobs:
       - name: Run TFLint
         run: tflint -f compact
 
-      - name: Calculate destroy arg
-        id: destroy_arg
-        run: |
-          if [ $DESTROY == "true" ]; then
-            echo "::set-output name=val::-destroy" 
-          else
-            echo "::set-output name=val:: "
-          fi
-        env:
-          DESTROY: ${{ github.event.inputs.destroy }}
-
       - name: Terraform Plan
         id: plan
-        run: terraform plan $DESTROY -no-color --out=out.tfplan
+        run: terraform plan -no-color --out=out.tfplan
         env:
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           ARM_USE_OIDC: true
-          DESTROY: ${{ steps.destroy_arg.outputs.val }}
 
       - name: Create the plan summary
         uses: actions/github-script@v6
@@ -145,8 +133,7 @@ jobs:
     environment: dev
     defaults:
       run:
-        working-directory: ${{ env.tf_actions_working_dir }}
-
+        working-directory: infra
     steps:
       - uses: actions/checkout@v2
 
