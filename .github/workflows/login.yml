@@ -11,9 +11,12 @@ permissions:
   contents: read
 
 jobs:
-  build-and-deploy:
+  deploy-with-terraform:
     runs-on: ubuntu-latest
     environment: dev
+    run:
+        working-directory: infra
+        
     steps:
       - name: "Az CLI login"
         uses: azure/login@v1
