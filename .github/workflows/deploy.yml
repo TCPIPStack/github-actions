@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: tf-plan
-          path: ./tfplan
+          path: infra/tfplan
 
   apply:
     name: Terraform apply
@@ -86,7 +86,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: tf-plan
-          path: ./tfplan
+          path: infra/tfplan
 
       - name: Apply the plan
         id: apply
