@@ -46,8 +46,7 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           ARM_USE_OIDC: true
 
-      - name: Write Plan as summary
-        uses: actions/github-script@v6
+      - name: Write Output as summary
         if: always()
         id: summary
         env:
