@@ -1,7 +1,5 @@
-
 param containerName string = 'tfstate'
-param storageAccountName string = 'tfstate-storage'
-
+param storageAccountName string = 'tfstatestoragefmebu4'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
   name: storageAccountName
@@ -10,17 +8,12 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
     name: 'Standard_LRS'
   }
   kind: 'StorageV2'
-  properties: {
-    accessTier: 'Hot'
-  }
-}
+  resource blobService 'blobServices' = {
+    name: 'default'
 
-// Create container
-resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-09-01' = {
-  name: containerName
-  properties: {
-    publicAccess: 'None'
-    metadata: {}
+    resource container 'containers' = {
+      name: containerName
+    }
   }
 }
 
