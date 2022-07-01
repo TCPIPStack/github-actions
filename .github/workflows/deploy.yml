@@ -52,9 +52,7 @@ jobs:
         id: summary
         env:
           PLAN: "${{ steps.plan.outputs.stdout }}"
-        with:
-          script: |
-            ${process.env.APPLY} >> $GITHUB_STEP_SUMMARY
+        run: ${process.env.APPLY} >> $GITHUB_STEP_SUMMARY
 
       - name: Upload the plan
         uses: actions/upload-artifact@v3
