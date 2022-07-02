@@ -55,7 +55,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = '${{ steps.plan.outputs.stdout }}'
+            const output = '${{ steps.plan.outputs.stdout }}';
             const fs = require('fs');
             fs.writeFileSync('infra/summary.md', output);
             core.setOutput('summary', output);
