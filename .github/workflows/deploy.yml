@@ -55,7 +55,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = '${process.env.PLAN}'
+            const output = '${{ steps.plan.outputs.stdout }}'
             const fs = require('fs');
             fs.writeFileSync('infra/summary.md', output);
             core.setOutput('summary', output);
@@ -108,7 +108,7 @@ jobs:
 
       - name: Apply the plan
         id: apply
-        run: terraform apply -no-color -auto-approve tfplan -var-file=vars.tfvars
+        run: terraform apply -no-color -auto-approve tfplan
         env:
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
