@@ -1,4 +1,4 @@
-name: Terraform
+name: Infrastructur
 
 on:
   workflow_dispatch:

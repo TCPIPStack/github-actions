@@ -4,6 +4,6 @@ variable "resource_group_location" {
 }
 
 variable "resource_group_name" {
-  default = "github-actions"
+  default     = "github-actions"
   description = "Name of the resource group."
 }
