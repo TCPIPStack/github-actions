@@ -23,8 +23,6 @@ env:
   AZURE_WEBAPP_NAME: github-actions-fme-bu4
   BUILD_DIR: app # set this to the name of your Azure Web App
   PYTHON_VERSION: "3.9" # set this to the Python version to use
-  FLASK_APP: hello.py
-  APP_SETTINGS: '[{"name": "FLASK_APP","value": "hello.py"}, {"Name": "SCM_DO_BUILD_DURING_DEPLOYMENT", "Value": "true"}]'
 
 on:
   push:
@@ -40,7 +38,7 @@ jobs:
   buildAndDeploy:
     runs-on: ubuntu-latest
     environment:
-      name: tfplan
+      name: dev-app
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     defaults:
       run:
