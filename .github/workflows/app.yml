@@ -37,7 +37,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: tfplan
     defaults:
       run:
         working-directory: ${{ env.BUILD_DIR }}
@@ -77,12 +77,10 @@ jobs:
             !venv/
 
   deploy:
-    permissions:
-      contents: none
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: dev
+      name: tfplan
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     defaults:
       run:
