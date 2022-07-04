@@ -6,3 +6,6 @@
 *.tfstate
 *.tfstate.*
 *.terraform.*
+
+*__**
+*venv*
