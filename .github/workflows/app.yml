@@ -24,7 +24,7 @@ env:
   BUILD_DIR: app  # set this to the name of your Azure Web App
   PYTHON_VERSION: '3.9'              # set this to the Python version to use
   FLASK_APP: hello.py
-  APP_SETTINGS: '{"name": "FLASK_APP","value": "hello.py"}'
+  APP_SETTINGS: '[{"name": "FLASK_APP","value": "hello.py"}]'
 
 on:
   push:
@@ -37,7 +37,7 @@ permissions:
       contents: read
 
 jobs:
-  build:
+  buildAndDeploy:
     runs-on: ubuntu-latest
     environment:
       name: tfplan
@@ -70,7 +70,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
-      - name: Set Web App ACR authentication
+      - name: Set app settings
         uses: Azure/appservice-settings@v1
         with:
           app-name: '${{ env.AZURE_WEBAPP_NAME }}'
